@@ -3,6 +3,7 @@ package com.example.apireactcrud.controller;
 import com.example.apireactcrud.controller.dto.NovoProdutoDto;
 import com.example.apireactcrud.model.Produto;
 import com.example.apireactcrud.service.ProdutoService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,8 +19,8 @@ public class ProdutoController {
     }
 
     @GetMapping
-    public String produto(){
-        return "Produto";
+    public ResponseEntity<?> produto(){
+        return ResponseEntity.status(302).body("Produto");
     }
 
     @GetMapping("/{id}")
