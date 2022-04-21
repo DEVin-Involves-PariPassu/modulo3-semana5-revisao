@@ -31,7 +31,7 @@ public class TokenService {
                 .setSubject(String.valueOf(usuario.getId()))
                 .setIssuedAt(agora)
                 .setExpiration(expiracao)
-                .signWith(SignatureAlgorithm.ES256,secret) //encripta todo o jwt com o ES256 e adiciona o secret
+                .signWith(SignatureAlgorithm.HS256,secret) //encripta todo o jwt com o HS256 e adiciona o secret
                 .compact();
     }
 

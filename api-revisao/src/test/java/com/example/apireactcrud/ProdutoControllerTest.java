@@ -23,9 +23,14 @@ public class ProdutoControllerTest {
     @Test
     public void test() throws Exception {
         // gerando o token
-        String body = "{\"username\":\"user\",\"password\":\"pass\"}";
+        String body = "{\n" +
+                "    \"username\":\"user\",\n" +
+                "    \"password\":\"pass\"\n" +
+                "}";
         MvcResult result = mockMvc
-                .perform(MockMvcRequestBuilders.post("/auth").content(body))
+                .perform(MockMvcRequestBuilders.post("/auth").content(body)
+                        .header("Content-Type", "application/json" )
+                )
                 .andExpect(status().isOk()).andReturn();
 
         // extraindo o token
@@ -35,8 +40,12 @@ public class ProdutoControllerTest {
 
         //executando controller com o token
         mockMvc.perform(MockMvcRequestBuilders.get("/produto")
-                .header("Authorization", "Bearer " + token))
+                        .header("Authorization", "Bearer " + token)
+                        .header("Content-Type", "application/json" )
+                )
                 .andExpect(status().isOk());
 
     }
+
+
 }

@@ -48,9 +48,11 @@ public class AutenticacaoController {
     }
 
     @PostMapping("/adduser")
-    public Usuario adicionarUsuario(AdicionaUsuarioDto addDto){
+    public Usuario adicionarUsuario(@RequestBody AdicionaUsuarioDto addDto){
         Perfil perfil = addDto.converterPerfil();
         Usuario usuario = addDto.converterUsuario(List.of(perfil));
+        if (usuarioRepository.existsByUsername(usuario.getUsername()))
+            return null;
         perfilRepository.save(perfil);
         return usuarioRepository.save(usuario);
     }
